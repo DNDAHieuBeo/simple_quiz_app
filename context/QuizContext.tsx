@@ -11,9 +11,11 @@ const QuizContext = createContext<QuizContextType | undefined>(undefined);
 
 export const QuizProvider = ({ children }: { children: React.ReactNode }) => {
     const [questions, setQuestions] = useState<Question[]>([]);
+    const [userAnswers, setUserAnswers] = useState<string[]>([]);
+
 
     return (
-        <QuizContext.Provider value={{ questions, setQuestions }}>
+        <QuizContext.Provider value={{ questions, setQuestions ,userAnswers ,setUserAnswers}}>
             {children}
         </QuizContext.Provider>
     );

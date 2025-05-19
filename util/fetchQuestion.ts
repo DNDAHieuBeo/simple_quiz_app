@@ -2,15 +2,20 @@ import axios from 'axios';
 import config from "@/util/config";
 import he from 'he';
 
-export async function fetchQuestion(difficulty: string) {
+
+
+export async function fetchQuestion(difficulty: string, type: string) {
     try {
         let url = `${config.env.quizApi}/api.php?amount=10`;
         if (difficulty !== "random") {
             url += `&difficulty=${difficulty}`;
         }
+        if (type !== "random") {
+            url += `&type=${type}`;
+        }
 
-        const response = await axios.get(url);
-        const data = response.data.results.map((q: any) => {
+        const response = await axios.get<{ results: RawQuestion[] }>(url);
+        const data = response.data.results.map((q) => {
             const options = [...q.incorrect_answers, q.correct_answer];
             return {
                 question: he.decode(q.question),
@@ -18,9 +23,14 @@ export async function fetchQuestion(difficulty: string) {
                 options: options.map((o: string) => he.decode(o)).sort(() => Math.random() - 0.5),
             };
         });
+
         return data;
-    } catch (error) {
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+            console.error("Axios error:", error.message);
+        } else {
+            console.error("Unknown error:", error);
+        }
         throw new Error("Failed to fetch questions");
     }
 }
-

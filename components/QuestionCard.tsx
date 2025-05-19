@@ -11,10 +11,11 @@ export default function QuestionCard({
                                          onSelect,
                                          selectedOption,
                                      }: QuestionCardProps) {
+    const isAnswered = !!selectedOption;
     return (
-        <div className="bg-gray-100 p-6 rounded text-left max-w-xl mx-auto space-y-4">
+        <div className="p-6 rounded text-left max-w-xl mx-auto space-y-4">
             <p className="font-semibold text-lg">
-                Câu {questionIndex + 1}: {question}
+                Question {questionIndex + 1}: {question}
             </p>
             <RadioGroup
                 value={selectedOption}
@@ -25,7 +26,7 @@ export default function QuestionCard({
                     const id = `q${questionIndex}-opt${idx}`;
                     return (
                         <div className="flex items-center space-x-2" key={idx}>
-                            <RadioGroupItem value={opt} id={id} className='cursor-pointer'/>
+                            <RadioGroupItem value={opt} id={id} disabled={isAnswered} className="cursor-pointer disabled:opacity-50"/>
                             <Label htmlFor={id}>{opt}</Label>
                         </div>
                     );
