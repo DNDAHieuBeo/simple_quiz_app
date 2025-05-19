@@ -27,6 +27,7 @@ export default function Home() {
             setQuestions(data);
             router.push('/quiz/0');
         } catch (error) {
+            console.error('Error fetching questions:', error);
             alert('Failed to load quiz questions. Please try again later.');
         } finally {
             setLoading(false);
