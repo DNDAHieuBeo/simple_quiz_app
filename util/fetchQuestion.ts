@@ -1,12 +1,12 @@
 import axios from 'axios';
-import config from "@/util/config";
+
 import he from 'he';
 
 
 
 export async function fetchQuestion(difficulty: string, type: string) {
     try {
-        let url = `${config.env.quizApi}/api.php?amount=10`;
+        let url = `https://opentdb.com/api.php?amount=10`;
         if (difficulty !== "random") {
             url += `&difficulty=${difficulty}`;
         }
