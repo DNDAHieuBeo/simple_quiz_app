@@ -1,17 +1,17 @@
 'use client';
-import { useQuiz } from '@/context/QuizContext';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { CheckCircle2, XCircle } from "lucide-react";
-import { useTimer } from '@/context/TimerContext';
+import {useQuiz} from '@/context/QuizContext';
+import {useRouter} from 'next/navigation';
+import {useEffect} from 'react';
+import {Button} from "@/components/ui/button";
+import {motion} from "framer-motion";
+import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
+import {Label} from "@/components/ui/label";
+import {CheckCircle2, XCircle} from "lucide-react";
+import {useTimer} from '@/context/TimerContext';
 
 export default function ScoreboardPage() {
-    const { questions, userAnswers } = useQuiz();
-    const { stopTimer } = useTimer();
+    const {questions, userAnswers} = useQuiz();
+    const {stopTimer} = useTimer();
     const router = useRouter();
 
     useEffect(() => {
@@ -36,9 +36,9 @@ export default function ScoreboardPage() {
                         return (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
+                                initial={{opacity: 0, y: 20}}
+                                animate={{opacity: 1, y: 0}}
+                                transition={{delay: index * 0.1}}
                                 className={`bg-white rounded-lg shadow-md p-6 ${
                                     isCorrect ? 'border-l-4 border-green-500' : 'border-l-4 border-red-500'
                                 }`}
@@ -63,8 +63,8 @@ export default function ScoreboardPage() {
                                                     isCorrectAnswer
                                                         ? 'bg-green-50 border border-green-200'
                                                         : isUserAnswer && !isCorrect
-                                                        ? 'bg-red-50 border border-red-200'
-                                                        : 'bg-gray-50 border border-gray-200'
+                                                            ? 'bg-red-50 border border-red-200'
+                                                            : 'bg-gray-50 border border-gray-200'
                                                 }`}
                                             >
                                                 <RadioGroupItem
@@ -83,10 +83,10 @@ export default function ScoreboardPage() {
                                                     {option}
                                                 </Label>
                                                 {isCorrectAnswer && (
-                                                    <CheckCircle2 className="h-5 w-5 text-green-600" />
+                                                    <CheckCircle2 className="h-5 w-5 text-green-600"/>
                                                 )}
                                                 {isUserAnswer && !isCorrect && (
-                                                    <XCircle className="h-5 w-5 text-red-600" />
+                                                    <XCircle className="h-5 w-5 text-red-600"/>
                                                 )}
                                             </div>
                                         );
@@ -97,7 +97,8 @@ export default function ScoreboardPage() {
                                     <div className="mt-4 text-sm text-gray-600 flex items-center gap-2">
                                         <p>Your answer: <span className="text-red-600">{userAnswer}</span></p>
                                         <span>•</span>
-                                        <p>Correct answer: <span className="text-green-600">{question.correct_answer}</span></p>
+                                        <p>Correct answer: <span
+                                            className="text-green-600">{question.correct_answer}</span></p>
                                     </div>
                                 )}
                             </motion.div>

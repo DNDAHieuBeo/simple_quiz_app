@@ -1,9 +1,5 @@
 import axios from 'axios';
-
 import he from 'he';
-
-
-
 export async function fetchQuestion(difficulty: string, type: string) {
     try {
         let url = `https://opentdb.com/api.php?amount=10`;
@@ -25,6 +21,7 @@ export async function fetchQuestion(difficulty: string, type: string) {
         });
 
         return data;
+
     } catch (error: unknown) {
         if (axios.isAxiosError(error)) {
             console.error("Axios error:", error.message);

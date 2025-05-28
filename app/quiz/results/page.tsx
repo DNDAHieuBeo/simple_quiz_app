@@ -17,13 +17,21 @@ export default function ResultPage() {
             return;
         }
 
-        const correct = userAnswers.reduce((acc, answer, index) => {
-            return answer === questions[index]?.correct_answer ? acc + 1 : acc;
-        }, 0);
+        let correct = 0;
 
-        stopTimer(); // Dừng timer khi hoàn thành
+        for (let i = 0; i < userAnswers.length; i++) {
+            const userAnswer = userAnswers[i];
+            const correctAnswer = questions[i]?.correct_answer;
+
+            if (userAnswer === correctAnswer) {
+                correct++;
+            }
+        }
+
+        stopTimer();
         setCorrectCount(correct);
     }, [questions, userAnswers, router, stopTimer]);
+
 
     const message =
         correctCount >= 5

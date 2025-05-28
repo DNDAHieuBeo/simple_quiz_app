@@ -10,6 +10,7 @@ import { useTimer } from '@/context/TimerContext';
 
 
 export default function QuizPage() {
+
     const { id } = useParams();
     const questionIndex = parseInt(id as string, 10);
     const { questions, userAnswers, setUserAnswers } = useQuiz();
@@ -28,20 +29,15 @@ export default function QuizPage() {
         }
     }, [questionIndex, startTime]);
 
-    // this useEffect will run when the questions is changed
+
     useEffect(() => {
-        // when there no any questions or the questions array are empty, it will get back to the homepage
+        // when there no any questions or the questions array is empty, it will get back to the homepage
         if (!questions || questions.length === 0) {
             router.push('/');
         }
 
     }, [questions]);
 
-    useEffect(() => {
-        if (questionIndex === 0 && startTime === null) {
-            setStartTime(Date.now());
-        }
-    }, [questionIndex, startTime]);
 
     // when no any questions or no any questionIndex
     if (!questions || !questions[questionIndex]) return null;

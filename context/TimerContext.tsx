@@ -1,7 +1,6 @@
 'use client';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-
 const TimerContext = createContext<TimerContextType | undefined>(undefined);
 
 export const TimerProvider = ({ children }: { children: React.ReactNode }) => {
